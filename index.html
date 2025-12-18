@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ChronosTrack - A premium time tracking and schedule management application">
+    <title>ChronosTrack | Time Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12,6 12,12 16,14" />
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ChronosTrack</h1>
+                        <span>Efficiency Engine</span>
+                    </div>
+                </div>
+
+                <nav class="nav-tabs">
+                    <button class="nav-tab active" data-tab="planner">Planner</button>
+                    <button class="nav-tab" data-tab="timer">Timer</button>
+                    <button class="nav-tab" data-tab="stats">Stats</button>
+                    <button class="nav-tab" data-tab="weekly">Weekly</button>
+                </nav>
+
+                <div class="date-picker">
+                    <button class="date-nav" id="prevDay">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="15,18 9,12 15,6" />
+                        </svg>
+                    </button>
+                    <input type="date" id="selectedDate">
+                    <button class="date-nav" id="nextDay">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="9,18 15,12 9,6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Planner Tab -->
+            <div class="tab-content active" id="planner-tab">
+                <div class="planner-grid">
+                    <!-- Tasks Section -->
+                    <div class="tasks-column">
+                        <section class="card tasks-card">
+                            <div class="card-header">
+                                <h2>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                        <polyline points="22,4 12,14.01 9,11.01" />
+                                    </svg>
+                                    Daily Goals
+                                </h2>
+                                <span class="task-counter" id="taskCounter">0/0 Completed</span>
+                            </div>
+
+                            <form class="task-form" id="taskForm">
+                                <input type="text" id="newTaskInput" placeholder="Plan a task..." autocomplete="off">
+                                <button type="submit" class="add-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg>
+                                </button>
+                            </form>
+
+                            <div class="tasks-list" id="tasksList"></div>
+                        </section>
+
+                        <!-- Momentum Card -->
+                        <div class="momentum-card">
+                            <div class="momentum-header">
+                                <h3>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2" />
+                                    </svg>
+                                    Daily Momentum
+                                </h3>
+                            </div>
+                            <div class="momentum-value" id="momentumValue">0%</div>
+                            <p class="momentum-subtitle">Progress based on task completion</p>
+                            <div class="momentum-bar">
+                                <div class="momentum-fill" id="momentumFill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Log Section -->
+                    <section class="card activity-card">
+                        <div class="card-header">
+                            <h2>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                    <line x1="16" y1="2" x2="16" y2="6" />
+                                    <line x1="8" y1="2" x2="8" y2="6" />
+                                    <line x1="3" y1="10" x2="21" y2="10" />
+                                </svg>
+                                Activity Log
+                            </h2>
+                            <div class="category-legend">
+                                <span class="legend-item">
+                                    <div class="legend-dot revision"></div>Revision
+                                </span>
+                                <span class="legend-item">
+                                    <div class="legend-dot break"></div>Break
+                                </span>
+                                <span class="legend-item">
+                                    <div class="legend-dot routine"></div>Routine
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hours-list" id="hoursList"></div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Timer Tab -->
+            <div class="tab-content" id="timer-tab">
+                <div class="timer-container">
+                    <div class="timer-card">
+                        <div class="timer-mode-toggle">
+                            <button class="timer-mode active" data-mode="work">Work</button>
+                            <button class="timer-mode" data-mode="break">Break</button>
+                        </div>
+                        <div class="timer-display" id="timerDisplay">25:00</div>
+                        <div class="timer-controls">
+                            <button class="timer-btn start" id="timerStartBtn">Start</button>
+                            <button class="timer-btn reset" id="timerResetBtn">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M23 4v6h-6" />
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="pomodoro-sessions">
+                            <span id="sessionCount">Sessions today: 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Tab -->
+            <div class="tab-content" id="stats-tab">
+                <div class="stats-grid">
+                    <div class="card stats-allocation-card">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+                                <path d="M22 12A10 10 0 0 0 12 2v10z" />
+                            </svg>
+                            Time Allocation
+                        </h3>
+                        <div class="allocation-bars" id="allocationBars"></div>
+                    </div>
+
+                    <div class="card stats-summary-card">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12,6 12,12 16,14" />
+                            </svg>
+                            Performance Summary
+                        </h3>
+                        <div class="summary-cards" id="summaryCards"></div>
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                                    <line x1="6" y1="1" x2="6" y2="4" />
+                                    <line x1="10" y1="1" x2="10" y2="4" />
+                                    <line x1="14" y1="1" x2="14" y2="4" />
+                                </svg>
+                            </div>
+                            <div class="tip-content">
+                                <h4>Revise & Refuel</h4>
+                                <p id="tipText">Research shows periodic 5-10 minute breaks every hour significantly
+                                    improve retention.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Tab -->
+            <div class="tab-content" id="weekly-tab">
+                <div class="weekly-container">
+                    <div class="card weekly-card">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="18" y1="20" x2="18" y2="10" />
+                                <line x1="12" y1="20" x2="12" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="14" />
+                            </svg>
+                            Weekly Overview
+                        </h3>
+                        <div class="weekly-chart" id="weeklyChart"></div>
+                    </div>
+
+                    <div class="card weekly-insights-card">
+                        <h3>Weekly Insights</h3>
+                        <div class="insights-list" id="insightsList"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
